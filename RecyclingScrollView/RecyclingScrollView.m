@@ -121,28 +121,4 @@ static char RecyclingScrollViewIndexKey;
     }
 }
 
-
-- (void)setIndex:(NSInteger)index forVisibleCell:(UIView *)cell {
-    
-    objc_setAssociatedObject(cell, &RecyclingScrollViewIndexKey, @(index), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (id)visibleCellAtIndex:(NSInteger)index {
-    
-    for (id cell in [contentView subviews]) {
-        NSInteger i = [self indexForVisibleCell:cell];
-        if (index == i) {
-            return cell;
-        }
-    }
-    return nil;
-}
-
-- (NSInteger)indexForVisibleCell:(id)cell {
-    
-    NSAssert([[contentView subviews] containsObject:cell], @"cell %@ is not visible", cell);
-    NSNumber *index = objc_getAssociatedObject(cell, &RecyclingScrollViewIndexKey);
-    return [index integerValue];
-}
-
 @end
